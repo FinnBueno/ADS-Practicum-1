@@ -41,10 +41,8 @@ public class Shunter {
     private static boolean hasPlaceForOneWagon(Train train, Wagon wagon) {
         // the engine of a train has a maximum capacity, this method checks for one wagon
 
-        if (isSuitableWagon(train, wagon)){
-            if (train.getEngine().getMaxWagons() < train.getNumberOfWagons())
-                return true;
-        }
+        if (train.getEngine().getMaxWagons() < train.getNumberOfWagons())
+            return true;        
 
         return false;
     }
