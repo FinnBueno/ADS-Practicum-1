@@ -13,4 +13,8 @@ public class FreightWagon extends Wagon {
 		super(wagonId);
 		this.maxWeight = maxWeight;
 	}
+
+	public int getMaxWeight() {
+		return maxWeight;
+	}
 }

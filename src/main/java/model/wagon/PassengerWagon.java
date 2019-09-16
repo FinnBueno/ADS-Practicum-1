@@ -13,4 +13,8 @@ public class PassengerWagon extends Wagon {
 		super(wagonId);
 		this.numberOfSeats = numberOfSeats;
 	}
+
+	public int getNumberOfSeats() {
+		return numberOfSeats;
+	}
 }
