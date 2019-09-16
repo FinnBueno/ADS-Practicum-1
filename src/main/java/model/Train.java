@@ -32,13 +32,8 @@ public class Train implements Iterable {
          this method does the calculation */
 
        numberOfWagons = 0;
-
        if(!hasNoWagons()){
-           Wagon currentWagon = firstWagon;
-           while(currentWagon != null){
-               numberOfWagons++;
-               currentWagon = currentWagon.getNextWagon();
-           }
+           numberOfWagons = firstWagon.getNumberOfWagonsAttached() + 1;
        }
     }
 
