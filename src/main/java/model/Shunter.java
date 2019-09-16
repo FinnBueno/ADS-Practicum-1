@@ -42,7 +42,7 @@ public class Shunter {
         // the engine of a train has a maximum capacity, this method checks for one wagon
 
         if (train.getEngine().getMaxWagons() < train.getNumberOfWagons())
-            return true;        
+            return true;
 
         return false;
     }
@@ -54,8 +54,14 @@ public class Shunter {
          hook the wagon on the last wagon (see Wagon class)
          adjust number of Wagons of Train */
 
-         return false;
+        if (hasPlaceForWagons(train, wagon) && isSuitableWagon(train, wagon)){
+            Wagon lastWagon = train.getFirstWagon().getLastWagonAttached();
+            lastWagon.setNextWagon(wagon);
+            train.resetNumberOfWagons();
+            return true;
+        }
 
+         return false;
     }
 
     public static boolean hookWagonOnTrainFront(Train train, Wagon wagon) {
@@ -65,15 +71,33 @@ public class Shunter {
          if Train has wagons hookOn to Locomotive and hook firstWagon of Train to lastWagon attached to the wagon
          adjust number of Wagons of Train */
 
-        return false;
+        if(hasPlaceForWagons(train, wagon) && isSuitableWagon(train, wagon)){
+            if (train.hasNoWagons()){
+                train.setFirstWagon(wagon);
+                train.resetNumberOfWagons();
+                return true;
+            }
+            Wagon firstWagon = train.getFirstWagon();
+            if (hookWagonOnWagon(wagon.getLastWagonAttached(), firstWagon)){
+                train.setFirstWagon(wagon);
+                train.resetNumberOfWagons();
+                return true;
+            }
+        }
 
+        return false;
     }
 
     public static boolean hookWagonOnWagon(Wagon first, Wagon second) {
         /* check if wagons are of the same kind (suitable)
         * if so make second wagon next wagon of first */
-        return false;
 
+        if (isSuitableWagon(first, second)){
+            first.setNextWagon(second);
+            return true;
+        }
+
+        return false;
     }
 
 
