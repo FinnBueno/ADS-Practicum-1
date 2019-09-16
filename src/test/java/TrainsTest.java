@@ -1,5 +1,6 @@
 import model.*;
 
+import model.wagon.PassengerWagon;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,13 +10,13 @@ import java.util.ArrayList;
 
 public class TrainsTest {
 
-//    private ArrayList<PassengerWagon> pwList;
+    private ArrayList<PassengerWagon> pwList;
     private Train firstPassengerTrain;
     private Train secondPassengerTrain;
     private Train firstFreightTrain;
     private Train secondFreightTrain;
 
-   /* @BeforeEach
+    @BeforeEach
     private void makeListOfPassengerWagons() {
         pwList = new ArrayList<>();
         pwList.add(new PassengerWagon(3, 100));
@@ -24,9 +25,9 @@ public class TrainsTest {
         pwList.add(new PassengerWagon(32, 150));
         pwList.add(new PassengerWagon(38, 140));
         pwList.add(new PassengerWagon(11, 100));
-    }*/
+    }
 
-    /*private void makeTrains() {
+    private void makeTrains() {
         Locomotive thomas = new Locomotive(2453, 7);
         Locomotive gordon = new Locomotive(5277, 8);
         Locomotive emily = new Locomotive(4383, 11);
@@ -37,23 +38,23 @@ public class TrainsTest {
             Shunter.hookWagonOnTrainRear(firstPassengerTrain, w);
         }
         secondPassengerTrain = new Train(gordon, "Joburg", "Cape Town");
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void checkNumberOfWagonsOnTrain() {
         makeTrains();
         assertEquals(6, firstPassengerTrain.getNumberOfWagons(), "Train should have 6 wagons");
         System.out.println(firstPassengerTrain);
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void checkNumberOfSeatsOnTrain() {
         makeTrains();
         assertEquals( 730, firstPassengerTrain.getNumberOfSeats());
         System.out.println(firstPassengerTrain);
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void checkPositionOfWagons() {
         makeTrains();
         int position = 1;
@@ -62,18 +63,18 @@ public class TrainsTest {
             position++;
         }
 
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void checkHookOneWagonOnTrainFront() {
         makeTrains();
         Shunter.hookWagonOnTrainFront(firstPassengerTrain, new PassengerWagon(21, 140));
         assertEquals( 7, firstPassengerTrain.getNumberOfWagons(), "Train should have 7 wagons");
         assertEquals( 1, firstPassengerTrain.getPositionOfWagon(21));
 
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void checkHookRowWagonsOnTrainRearFalse() {
         makeTrains();
         Wagon w1 = new PassengerWagon(11, 100);
@@ -81,9 +82,9 @@ public class TrainsTest {
         Shunter.hookWagonOnTrainRear(firstPassengerTrain, w1);
         assertEquals(6, firstPassengerTrain.getNumberOfWagons(), "Train should have still have 6 wagons, capacity reached");
         assertEquals( -1, firstPassengerTrain.getPositionOfWagon(43));
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void checkMoveOneWagon() {
         makeTrains();
         Shunter.moveOneWagon(firstPassengerTrain, secondPassengerTrain, pwList.get(3));
@@ -92,9 +93,9 @@ public class TrainsTest {
         assertEquals(1, secondPassengerTrain.getNumberOfWagons(), "Train should have 1 wagon");
         assertEquals( 1, secondPassengerTrain.getPositionOfWagon(32));
 
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void checkMoveRowOfWagons() {
         makeTrains();
         Wagon w1 = new PassengerWagon(11, 100);
@@ -105,6 +106,6 @@ public class TrainsTest {
         assertEquals( 2, firstPassengerTrain.getPositionOfWagon(24));
         assertEquals(6, secondPassengerTrain.getNumberOfWagons(), "Train should have 6 wagons");
         assertEquals( 4, secondPassengerTrain.getPositionOfWagon(32));
-    }*/
+    }
 
 }
