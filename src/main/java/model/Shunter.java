@@ -1,27 +1,50 @@
 package model;
 
+import model.wagon.FreightWagon;
+import model.wagon.PassengerWagon;
+
 public class Shunter {
 
 
     /* four helper methods than are used in other methods in this class to do checks */
     private static boolean isSuitableWagon(Train train, Wagon wagon) {
         // trains can only exist of passenger wagons or of freight wagons
-        return true;
+
+        if (wagon instanceof PassengerWagon && train.isPassengerTrain())
+            return true;
+        if(wagon instanceof FreightWagon && train.isFreightTrain())
+            return true;
+
+        return false;
     }
 
     private static boolean isSuitableWagon(Wagon one, Wagon two) {
         // passenger wagons can only be hooked onto passenger wagons
-        return true;
+
+        if (one.getClass() == two.getClass())
+            return true;
+
+        return false;
     }
 
     private static boolean hasPlaceForWagons(Train train, Wagon wagon) {
         // the engine of a train has a maximum capacity, this method checks for a row of wagons
-        return true;
+
+        int wagonsTotal = train.getNumberOfWagons() + wagon.getNumberOfWagonsAttached() + 1;
+
+        if (wagonsTotal <= train.getEngine().getMaxWagons())
+            return true;
+
+        return false;
     }
 
     private static boolean hasPlaceForOneWagon(Train train, Wagon wagon) {
         // the engine of a train has a maximum capacity, this method checks for one wagon
-        return true;
+
+        if (train.getEngine().getMaxWagons() < train.getNumberOfWagons())
+            return true;        
+
+        return false;
     }
 
     public static boolean hookWagonOnTrainRear(Train train, Wagon wagon) {
