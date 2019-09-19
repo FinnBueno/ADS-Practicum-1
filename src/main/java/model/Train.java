@@ -5,7 +5,7 @@ import model.wagon.PassengerWagon;
 
 import java.util.Iterator;
 
-public class Train implements Iterable {
+public class Train implements Iterable<Wagon> {
     private Locomotive engine;
     private Wagon firstWagon;
     private String destination;
@@ -75,9 +75,15 @@ public class Train implements Iterable {
     }
 
     public Wagon getWagonOnPosition(int position) throws IndexOutOfBoundsException {
+        Wagon wag = getFirstWagon();
+        do {
+            System.out.println(wag.getWagonId());
+            wag = wag.getNextWagon();
+        } while (wag != null);
         /* find the wagon on a given position on the train
          position of wagons start at 1 (firstWagon of train)
          use exceptions to handle a position that does not exist */
+        System.out.println("NOW: " + numberOfWagons + " POS: " + position);
         if (position < 1 || position > numberOfWagons) {
             throw new IndexOutOfBoundsException("This train does not have a wagon on the specified position position");
         }
@@ -154,7 +160,7 @@ public class Train implements Iterable {
     }
 }
 
-class TrainWagonIterator implements Iterator {
+class TrainWagonIterator implements Iterator<Wagon> {
 
     private Train train;
     private int pos;
@@ -166,14 +172,11 @@ class TrainWagonIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
-
-        return false;
+        return pos < train.getNumberOfWagons();
     }
 
     @Override
-    public Object next() {
-        train.getWagonOnPosition(pos);
-
-        return null;
+    public Wagon next() {
+        return train.getWagonOnPosition(++pos);
     }
 }

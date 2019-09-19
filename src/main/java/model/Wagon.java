@@ -12,12 +12,12 @@ public class Wagon {
     public Wagon getLastWagonAttached() {
         // find the last wagon of the row of wagons attached to this wagon
         // if no wagons are attached return this wagon
-        return null;
+        return nextWagon == null ? this : nextWagon.getLastWagonAttached();
     }
 
     public void setNextWagon(Wagon nextWagon) {
         // when setting the next wagon, set this wagon to be previous wagon of next wagon
-
+        this.nextWagon = nextWagon;
     }
 
     public Wagon getPreviousWagon() {
@@ -37,8 +37,13 @@ public class Wagon {
     }
 
     public int getNumberOfWagonsAttached() {
-
-        return 0;
+        int count = 0;
+        Wagon next = nextWagon;
+        while (next != null) {
+            count++;
+            next = next.nextWagon;
+        }
+        return count;
     }
 
     public boolean hasNextWagon() {
