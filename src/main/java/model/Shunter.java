@@ -5,7 +5,6 @@ import model.wagon.PassengerWagon;
 
 public class Shunter {
 
-
     /* four helper methods than are used in other methods in this class to do checks */
     private static boolean isSuitableWagon(Train train, Wagon wagon) {
         // trains can only exist of passenger wagons or of freight wagons
@@ -22,11 +21,7 @@ public class Shunter {
 
     private static boolean isSuitableWagon(Wagon one, Wagon two) {
         // passenger wagons can only be hooked onto passenger wagons
-
-        if (one.getClass() == two.getClass())
-            return true;
-
-        return false;
+        return one == null && two == null || one != null && two != null && one.getClass() == two.getClass();
     }
 
     private static boolean hasPlaceForWagons(Train train, Wagon wagon) {
@@ -42,8 +37,7 @@ public class Shunter {
 
     private static boolean hasPlaceForOneWagon(Train train, Wagon wagon) {
         // the engine of a train has a maximum capacity, this method checks for one wagon
-
-        return train.getNumberOfWagons() +1 <= train.getEngine().getMaxWagons();
+        return train.getNumberOfWagons() < train.getEngine().getMaxWagons();
     }
 
     public static boolean hookWagonOnTrainRear(Train train, Wagon wagon) {
@@ -98,6 +92,7 @@ public class Shunter {
 
         if (isSuitableWagon(first, second)){
             first.setNextWagon(second);
+            second.setPreviousWagon(first);
             return true;
         }
 
