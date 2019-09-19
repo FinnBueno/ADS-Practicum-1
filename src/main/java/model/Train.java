@@ -75,15 +75,15 @@ public class Train implements Iterable<Wagon> {
     }
 
     public Wagon getWagonOnPosition(int position) throws IndexOutOfBoundsException {
-        Wagon wag = getFirstWagon();
-        do {
-            System.out.println(wag.getWagonId());
-            wag = wag.getNextWagon();
-        } while (wag != null);
+//        Wagon wag = getFirstWagon();
+//        do {
+//            System.out.println(wag.getWagonId());
+//            wag = wag.getNextWagon();
+//        } while (wag != null);
         /* find the wagon on a given position on the train
          position of wagons start at 1 (firstWagon of train)
          use exceptions to handle a position that does not exist */
-        System.out.println("NOW: " + numberOfWagons + " POS: " + position);
+//        System.out.println("NOW: " + numberOfWagons + " POS: " + position);
         if (position < 1 || position > numberOfWagons) {
             throw new IndexOutOfBoundsException("This train does not have a wagon on the specified position position");
         }

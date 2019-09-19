@@ -18,6 +18,8 @@ public class Wagon {
     public void setNextWagon(Wagon nextWagon) {
         // when setting the next wagon, set this wagon to be previous wagon of next wagon
         this.nextWagon = nextWagon;
+        if (nextWagon != null)
+            nextWagon.setPreviousWagon(this);
     }
 
     public Wagon getPreviousWagon() {
@@ -37,13 +39,9 @@ public class Wagon {
     }
 
     public int getNumberOfWagonsAttached() {
-        int count = 0;
-        Wagon next = nextWagon;
-        while (next != null) {
-            count++;
-            next = next.nextWagon;
-        }
-        return count;
+        // Recursively call number of wagons behind from next wagons
+        // Wagon without nextWagon returns 0
+        return this.hasNextWagon() ? this.nextWagon.getNumberOfWagonsAttached() + 1 : 0;
     }
 
     public boolean hasNextWagon() {
