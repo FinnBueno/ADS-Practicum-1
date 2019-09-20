@@ -23,6 +23,7 @@ public class TrainsTest {
     private Train firstPassengerTrain;
     private Train secondPassengerTrain;
     private Train firstFreightTrain;
+    private Train secondFreightTrain;
 
     @BeforeEach
     private void makeListOfPassengerWagons() {
@@ -54,6 +55,7 @@ public class TrainsTest {
         Locomotive thomas = new Locomotive(2453, 7);
         Locomotive gordon = new Locomotive(5277, 8);
         Locomotive emily = new Locomotive(4383, 11);
+        Locomotive rebecca = new Locomotive(2275, 16);
 
         firstPassengerTrain = new Train(thomas, "Amsterdam", "Haarlem");
         for (Wagon w : pwList) {
@@ -65,6 +67,7 @@ public class TrainsTest {
         for (FreightWagon w : fwList) {
             Shunter.hookWagonOnTrainRear(firstFreightTrain, w);
         }
+        secondFreightTrain = new Train(rebecca, "Haarlem", "Schiphol");
     }
 
     @Test
@@ -93,7 +96,6 @@ public class TrainsTest {
             assertEquals( position, firstPassengerTrain.getPositionOfWagon(pw.getWagonId()));
             position++;
         }
-
     }
 
     @Test
@@ -102,7 +104,6 @@ public class TrainsTest {
         Shunter.hookWagonOnTrainFront(firstPassengerTrain, new PassengerWagon(21, 140));
         assertEquals( 7, firstPassengerTrain.getNumberOfWagons(), "Train should have 7 wagons");
         assertEquals( 1, firstPassengerTrain.getPositionOfWagon(21));
-
     }
 
     @Test
@@ -137,6 +138,18 @@ public class TrainsTest {
         assertEquals( 2, firstPassengerTrain.getPositionOfWagon(2));
         assertEquals(6, secondPassengerTrain.getNumberOfWagons(), "Train should have 6 wagons");
         assertEquals( 4, secondPassengerTrain.getPositionOfWagon(4));
+    }
+
+    @Test
+    public void checkSuitableWagon(){
+        makeTrains();
+        Wagon w1 = new FreightWagon(53, 140);
+        Shunter.hookWagonOnTrainRear(firstPassengerTrain, w1);
+        Shunter.hookWagonOnTrainRear(secondFreightTrain, w1);
+        assertEquals(6, firstPassengerTrain.getNumberOfWagons(), "Train should have 6 wagons");
+        Shunter.moveAllFromTrain(firstPassengerTrain, secondFreightTrain, pwList.get(2));
+        assertEquals(6, firstPassengerTrain.getNumberOfWagons(), "Train should have 6 wagons");
+        assertEquals(1, secondFreightTrain.getNumberOfWagons(), "Train should have 1 wagons");
     }
 
 }

@@ -92,7 +92,6 @@ public class Shunter {
 
         if (isSuitableWagon(first, second)){
             first.setNextWagon(second);
-            second.setPreviousWagon(first);
             return true;
         }
 
