@@ -9,14 +9,12 @@ public class Shunter {
     /* four helper methods than are used in other methods in this class to do checks */
     private static boolean isSuitableWagon(Train train, Wagon wagon) {
         // trains can only exist of passenger wagons or of freight wagons
-
         if (train.hasNoWagons())
             return true;
         if (wagon instanceof PassengerWagon && train.isPassengerTrain())
             return true;
         if (wagon instanceof FreightWagon && train.isFreightTrain())
             return true;
-
         return false;
     }
 

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -150,6 +151,15 @@ public class TrainsTest {
         Shunter.moveAllFromTrain(firstPassengerTrain, secondFreightTrain, pwList.get(2));
         assertEquals(6, firstPassengerTrain.getNumberOfWagons(), "Train should have 6 wagons");
         assertEquals(1, secondFreightTrain.getNumberOfWagons(), "Train should have 1 wagons");
+    }
+
+    @Test
+    public void checkTrainIterator() {
+        makeTrains();
+        int count = 1;
+        for (Wagon wagon : firstPassengerTrain) {
+            assertEquals(count++, wagon.getWagonId());
+        }
     }
 
 }
