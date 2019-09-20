@@ -3,6 +3,7 @@ package model;
 import model.wagon.FreightWagon;
 import model.wagon.PassengerWagon;
 
+// uitleg
 public class Shunter {
 
     /* four helper methods than are used in other methods in this class to do checks */
@@ -13,17 +14,19 @@ public class Shunter {
             return true;
         if (wagon instanceof PassengerWagon && train.isPassengerTrain())
             return true;
-        if(wagon instanceof FreightWagon && train.isFreightTrain())
+        if (wagon instanceof FreightWagon && train.isFreightTrain())
             return true;
 
         return false;
     }
 
+    // uitleg
     private static boolean isSuitableWagon(Wagon one, Wagon two) {
         // passenger wagons can only be hooked onto passenger wagons
         return one == null && two == null || one != null && two != null && one.getClass() == two.getClass();
     }
 
+    // uitleg
     private static boolean hasPlaceForWagons(Train train, Wagon wagon) {
         // the engine of a train has a maximum capacity, this method checks for a row of wagons
 
@@ -35,11 +38,13 @@ public class Shunter {
         return false;
     }
 
+    // uitleg
     private static boolean hasPlaceForOneWagon(Train train, Wagon wagon) {
         // the engine of a train has a maximum capacity, this method checks for one wagon
         return train.getNumberOfWagons() < train.getEngine().getMaxWagons();
     }
 
+    // uitleg
     public static boolean hookWagonOnTrainRear(Train train, Wagon wagon) {
          /* check if Locomotive can pull new number of Wagons
          check if wagon is correct kind of wagon for train
@@ -63,6 +68,7 @@ public class Shunter {
          return false;
     }
 
+    // uitleg
     public static boolean hookWagonOnTrainFront(Train train, Wagon wagon) {
         /* check if Locomotive can pull new number of Wagons
          check if wagon is correct kind of wagon for train
@@ -86,6 +92,7 @@ public class Shunter {
         return false;
     }
 
+    // uitleg
     public static boolean hookWagonOnWagon(Wagon first, Wagon second) {
         /* check if wagons are of the same kind (suitable)
         * if so make second wagon next wagon of first */
@@ -98,7 +105,7 @@ public class Shunter {
         return false;
     }
 
-
+    // uitleg
     public static boolean detachAllFromTrain(Train train, Wagon wagon) {
         /* check if wagon is on the train
          detach the wagon from its previousWagon with all its successor
@@ -114,6 +121,7 @@ public class Shunter {
         return false;
     }
 
+    // uitleg
     public static boolean detachOneWagon(Train train, Wagon wagon) {
         /* check if wagon is on the train
          detach the wagon from its previousWagon and hook the nextWagon to the previousWagon
@@ -140,6 +148,7 @@ public class Shunter {
          return false;
     }
 
+    // uitleg
     public static boolean moveAllFromTrain(Train from, Train to, Wagon wagon) {
         /* check if wagon is on train from
          check if wagon is correct for train and if engine can handle new wagons
@@ -156,6 +165,7 @@ public class Shunter {
         return false;
     }
 
+    // uitleg
     public static boolean moveOneWagon(Train from, Train to, Wagon wagon) {
         // detach only one wagon from train from and hook on rear of train to
         // do necessary checks and adjustments to trains and wagon

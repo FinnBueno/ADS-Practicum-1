@@ -1,5 +1,6 @@
 package model;
 
+// uitleg
 public class Wagon {
     private int wagonId;
     private Wagon previousWagon;
@@ -9,6 +10,7 @@ public class Wagon {
         this.wagonId = wagonId;
     }
 
+    // uitleg
     public Wagon getLastWagonAttached() {
         // find the last wagon of the row of wagons attached to this wagon
         // if no wagons are attached return this wagon
@@ -38,6 +40,7 @@ public class Wagon {
         return wagonId;
     }
 
+    // uitleg
     public int getNumberOfWagonsAttached() {
         // Recursively call number of wagons behind from next wagons
         // Wagon without nextWagon returns 0

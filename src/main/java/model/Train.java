@@ -5,8 +5,10 @@ import model.wagon.PassengerWagon;
 
 import java.util.Iterator;
 
+// uitleg
 public class Train implements Iterable<Wagon> {
     private Locomotive engine;
+    // uitleg
     private Wagon firstWagon;
     private String destination;
     private String origin;
@@ -56,6 +58,7 @@ public class Train implements Iterable<Wagon> {
         return firstWagon instanceof FreightWagon;
     }
 
+    // uitleg
     public int getPositionOfWagon(int wagonId) {
         // find a wagon on a train by id, return the position (first wagon had position 1)
         // if not found, than return -1
@@ -74,16 +77,8 @@ public class Train implements Iterable<Wagon> {
         return -1;
     }
 
+    // uitleg
     public Wagon getWagonOnPosition(int position) throws IndexOutOfBoundsException {
-//        Wagon wag = getFirstWagon();
-//        do {
-//            System.out.println(wag.getWagonId());
-//            wag = wag.getNextWagon();
-//        } while (wag != null);
-        /* find the wagon on a given position on the train
-         position of wagons start at 1 (firstWagon of train)
-         use exceptions to handle a position that does not exist */
-//        System.out.println("NOW: " + numberOfWagons + " POS: " + position);
         if (position < 1 || position > numberOfWagons) {
             throw new IndexOutOfBoundsException("This train does not have a wagon on the specified position position");
         }
@@ -97,6 +92,7 @@ public class Train implements Iterable<Wagon> {
         return lastCheckedWagon;
     }
 
+    // uitleg
     public int getNumberOfSeats() {
         /* give the total number of seats on a passenger train
          for freight trains the result should be 0 */
@@ -105,18 +101,17 @@ public class Train implements Iterable<Wagon> {
             return 0;
 
         int numberOfSeats = 0;
-        Wagon next = this.getFirstWagon();
 
-        while (next != null) {
-            if (next instanceof PassengerWagon) {
-                PassengerWagon currentWagon = (PassengerWagon) next;
-                numberOfSeats += currentWagon.getNumberOfSeats();
+        for (Wagon wagon : this) {
+            if (wagon instanceof PassengerWagon) {
+                numberOfSeats += ((PassengerWagon) wagon).getNumberOfSeats();
             }
-            next = next.getNextWagon();
         }
+
         return numberOfSeats;
     }
 
+    // uitleg
     public int getTotalMaxWeight() {
         /* give the total maximum weight of a freight train
          for passenger trains the result should be 0 */
@@ -124,14 +119,11 @@ public class Train implements Iterable<Wagon> {
             return 0;
 
         int totalWeight = 0;
-        Wagon next = this.getFirstWagon();
 
-        while (next != null) {
-            if (next instanceof FreightWagon) {
-                FreightWagon currentWagon = (FreightWagon) next;
-                totalWeight += currentWagon.getMaxWeight();
+        for (Wagon wagon : this) {
+            if (wagon instanceof FreightWagon) {
+                totalWeight += ((FreightWagon) wagon).getMaxWeight();
             }
-            next = next.getNextWagon();
         }
 
         return totalWeight;
@@ -145,10 +137,8 @@ public class Train implements Iterable<Wagon> {
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append(engine.toString());
-        Wagon next = this.getFirstWagon();
-        while (next != null) {
-            result.append(next.toString());
-            next = next.getNextWagon();
+        for (Wagon wagon : this) {
+            result.append(wagon.toString());
         }
         result.append(String.format(" with %d wagons and %d seats from %s to %s", numberOfWagons, getNumberOfSeats(), origin, destination));
         return result.toString();
@@ -160,6 +150,7 @@ public class Train implements Iterable<Wagon> {
     }
 }
 
+// uitleg
 class TrainWagonIterator implements Iterator<Wagon> {
 
     private Train train;
